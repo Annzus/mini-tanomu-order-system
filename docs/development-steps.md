@@ -8,11 +8,15 @@ Last updated: 2026-06-01
 ## Current Snapshot
 
 - Backend skeleton exists under `backend/`.
+- Backend business migrations, Eloquent models, relationships, and demo seed data have been added.
 - Frontend skeleton exists under `frontend/`.
 - Frontend has Vue Router, Pinia, Axios API client, auth store, route guards, and Japanese UI page scaffolds.
 - Frontend production build has been verified with `npm run build`.
-- Backend dependencies have not been installed because PHP and Composer are not currently available on PATH.
-- Backend business implementation has not started yet: migrations, models, seeders, controllers, services, requests, resources, and tests are still pending.
+- PHP 8.3 and Composer are installed and backend Composer dependencies have been installed.
+- MySQL 8.4 is installed and the `mini_tanomu_order_system` database has been created.
+- Laravel Sanctum config and personal access token migration have been published.
+- Backend migrations and demo seed data have been run successfully.
+- Backend API implementation has not started yet: controllers, services, requests, resources, middleware, and tests are still pending.
 
 ## Final Goal
 
@@ -27,7 +31,7 @@ The completed system should allow:
 
 ## Step 1: Backend Project Setup
 
-Status: In progress
+Status: Complete
 
 Tasks:
 
@@ -35,23 +39,24 @@ Tasks:
 - [x] Configure MySQL connection defaults in `backend/.env.example`.
 - [x] Add Laravel Sanctum dependency declaration to `backend/composer.json`.
 - [x] Add initial API route entrypoint at `backend/routes/api.php`.
-- [ ] Install backend Composer dependencies.
-- [ ] Publish/configure Laravel Sanctum.
-- [ ] Create database migrations.
-- [ ] Create Eloquent models.
-- [ ] Define model relationships.
-- [ ] Create seeders for demo data.
+- [x] Install backend Composer dependencies.
+- [x] Publish/configure Laravel Sanctum.
+- [x] Create database migrations.
+- [x] Create Eloquent models.
+- [x] Define model relationships.
+- [x] Create seeders for demo data.
 
 Expected output:
 
 - [x] `backend/` Laravel application exists.
 - [x] `.env.example` exists for backend setup.
-- [ ] Database schema can be migrated.
-- [ ] Demo data can be seeded.
+- [x] Database schema can be migrated.
+- [x] Demo data can be seeded.
 
 Notes:
 
-- Backend runtime verification is blocked until PHP 8.3 and Composer are available.
+- PHP 8.3 and Composer are available.
+- MySQL 8.4 is running locally as a background process because Windows service installation requires elevated permissions.
 
 ## Step 2: Auth
 
