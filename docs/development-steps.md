@@ -3,7 +3,7 @@
 This document tracks the implementation order for the Mini B2B Order Management System.
 It is based on section 18, "Implementation Order", from the project specification.
 
-Last updated: 2026-06-01
+Last updated: 2026-06-02
 
 ## Current Snapshot
 
@@ -16,7 +16,9 @@ Last updated: 2026-06-01
 - MySQL 8.4 is installed and the `mini_tanomu_order_system` database has been created.
 - Laravel Sanctum config and personal access token migration have been published.
 - Backend migrations and demo seed data have been run successfully.
-- Backend API implementation has not started yet: controllers, services, requests, resources, middleware, and tests are still pending.
+- Backend auth APIs have been implemented and verified with the seeded Customer A and Admin accounts.
+- Backend auth behavior is covered by Feature tests.
+- Product, order, admin, and CSV APIs are still pending.
 
 ## Final Goal
 
@@ -60,14 +62,14 @@ Notes:
 
 ## Step 2: Auth
 
-Status: Not started
+Status: Complete
 
 Tasks:
 
-- [ ] Implement login API.
-- [ ] Implement logout API.
-- [ ] Implement current-user API.
-- [ ] Implement role middleware for `customer` and `admin`.
+- [x] Implement login API.
+- [x] Implement logout API.
+- [x] Implement current-user API.
+- [x] Implement role middleware for `customer` and `admin`.
 
 Expected APIs:
 
@@ -77,9 +79,17 @@ Expected APIs:
 
 Expected output:
 
-- Demo users can log in with Sanctum token authentication.
-- Customer-only routes reject admin users.
-- Admin-only routes reject customer users.
+- [x] Demo users can log in with Sanctum token authentication.
+- [x] Authenticated users can fetch current-user data.
+- [x] Authenticated users can log out and revoke the current token.
+- [x] Role middleware is registered for future customer/admin routes.
+- [x] Invalid login attempts return validation errors.
+- [x] Unauthenticated API requests return JSON 401 responses.
+
+Notes:
+
+- Role rejection behavior will be exercised when Step 3 and Step 5 add customer/admin protected routes.
+- Auth API tests cover customer login, admin login, invalid credentials, logout, and unauthenticated JSON responses.
 
 ## Step 3: Product API
 

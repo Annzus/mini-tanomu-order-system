@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\AuthController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/health', function () {
@@ -9,10 +10,12 @@ Route::get('/health', function () {
     ]);
 });
 
-// Auth routes:
-// POST /api/login
-// POST /api/logout
-// GET /api/me
+Route::post('/login', [AuthController::class, 'login']);
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('/logout', [AuthController::class, 'logout']);
+    Route::get('/me', [AuthController::class, 'me']);
+});
 
 // Customer routes:
 // GET /api/products
