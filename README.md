@@ -1,9 +1,9 @@
-# Mini Tanomu Order System
+# Mini B2B Order Management System
 
 [English](README.md) | [日本語](README.ja.md)
 
-A full-stack B2B wholesale order management demo built with Laravel 11, Vue 3,
-TypeScript, Vite, MySQL, and Laravel Sanctum.
+A Laravel 11 + Vue 3 demo inspired by common B2B wholesale ordering workflows.
+It uses TypeScript, Vite, MySQL, and Laravel Sanctum.
 
 This project demonstrates a role-based ordering workflow: customer users can
 browse products, place orders, and view order history, while admin users can

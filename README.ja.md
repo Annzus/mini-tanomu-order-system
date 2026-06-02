@@ -1,9 +1,9 @@
-# Mini Tanomu Order System
+# Mini B2B Order Management System
 
 [English](README.md) | [日本語](README.ja.md)
 
-Laravel 11、Vue 3、TypeScript、Vite、MySQL、Laravel Sanctum で構築した
-B2B 卸売向け受注管理 demo です。
+Laravel 11 と Vue 3 で構築した、一般的な B2B 卸売受注ワークフローを題材にした demo です。
+TypeScript、Vite、MySQL、Laravel Sanctum を使用しています。
 
 このプロジェクトは、ロールベースの受注ワークフローを示す full-stack demo です。得意先ユーザーは商品閲覧、注文作成、注文履歴確認を行い、管理者ユーザーは全注文の確認、ステータス更新、CSV 出力を行います。認証、得意先別価格、トランザクションによる注文作成、注文明細の価格スナップショットはバックエンド側で処理します。
 

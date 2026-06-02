@@ -1,9 +1,9 @@
 {
     "$schema": "https://getcomposer.org/schema.json",
-    "name": "laravel/laravel",
+    "name": "annzus/mini-b2b-order-management-api",
     "type": "project",
-    "description": "The skeleton application for the Laravel framework.",
-    "keywords": ["laravel", "framework"],
+    "description": "Laravel 11 API for a mini B2B wholesale order management demo.",
+    "keywords": ["laravel", "b2b", "order-management", "api"],
     "license": "MIT",
     "require": {
         "php": "^8.2",
