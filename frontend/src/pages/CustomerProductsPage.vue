@@ -1,11 +1,29 @@
 <script setup lang="ts">
+import { onMounted, ref } from 'vue'
+import { fetchProducts } from '../api/products'
 import AppShell from '../components/AppShell.vue'
+import type { Product } from '../types/product'
 
-const products = [
-  { code: 'P-001', name: 'トマト', unit: 'kg', price: 450, defaultPrice: 500, customerPrice: true },
-  { code: 'P-004', name: '牛肉', unit: 'kg', price: 2100, defaultPrice: 2200, customerPrice: true },
-  { code: 'P-006', name: '米', unit: '袋', price: 3500, defaultPrice: 3500, customerPrice: false },
-]
+const products = ref<Product[]>([])
+const isLoading = ref(false)
+const errorMessage = ref('')
+
+onMounted(() => {
+  loadProducts()
+})
+
+async function loadProducts() {
+  isLoading.value = true
+  errorMessage.value = ''
+
+  try {
+    products.value = await fetchProducts()
+  } catch {
+    errorMessage.value = '商品情報を取得できませんでした。時間をおいて再度お試しください。'
+  } finally {
+    isLoading.value = false
+  }
+}
 </script>
 
 <template>
@@ -15,8 +33,10 @@ const products = [
         <span class="eyebrow">得意先</span>
         <h1>商品一覧</h1>
       </div>
-      <button class="primary-button" type="button">注文を送信</button>
+      <button class="primary-button" type="button" disabled>注文を送信</button>
     </div>
+
+    <p v-if="errorMessage" class="error-message">{{ errorMessage }}</p>
 
     <section class="content-grid">
       <div class="table-panel">
@@ -31,11 +51,17 @@ const products = [
             </tr>
           </thead>
           <tbody>
+            <tr v-if="isLoading">
+              <td class="muted" colspan="5">商品情報を読み込み中です。</td>
+            </tr>
+            <tr v-else-if="products.length === 0">
+              <td class="muted" colspan="5">表示できる商品がありません。</td>
+            </tr>
             <tr v-for="product in products" :key="product.code">
               <td>{{ product.code }}</td>
               <td>
                 {{ product.name }}
-                <span v-if="product.customerPrice" class="mini-badge">得意先価格</span>
+                <span v-if="product.is_customer_price" class="mini-badge">得意先価格</span>
               </td>
               <td>{{ product.unit }}</td>
               <td>¥{{ product.price.toLocaleString() }}</td>

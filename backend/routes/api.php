@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\ProductController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/health', function () {
@@ -17,9 +18,12 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/me', [AuthController::class, 'me']);
 });
 
-// Customer routes:
-// GET /api/products
-// GET /api/products/{id}
+Route::middleware(['auth:sanctum', 'role:customer'])->group(function () {
+    Route::get('/products', [ProductController::class, 'index']);
+    Route::get('/products/{product}', [ProductController::class, 'show']);
+});
+
+// Customer order routes:
 // POST /api/orders
 // GET /api/orders
 // GET /api/orders/{id}

@@ -18,7 +18,9 @@ Last updated: 2026-06-02
 - Backend migrations and demo seed data have been run successfully.
 - Backend auth APIs have been implemented and verified with the seeded Customer A and Admin accounts.
 - Backend auth behavior is covered by Feature tests.
-- Product, order, admin, and CSV APIs are still pending.
+- Customer product APIs have been implemented and verified with the seeded Customer A account.
+- The customer product page reads products and customer-specific prices from the backend.
+- Order, admin, and CSV APIs are still pending.
 
 ## Final Goal
 
@@ -93,14 +95,14 @@ Notes:
 
 ## Step 3: Product API
 
-Status: Not started
+Status: Complete
 
 Tasks:
 
-- [ ] Implement customer product list API.
-- [ ] Implement customer-specific price resolution.
-- [ ] Implement `ProductResource`.
-- [ ] Return only active products to customers.
+- [x] Implement customer product list API.
+- [x] Implement customer-specific price resolution.
+- [x] Implement `ProductResource`.
+- [x] Return only active products to customers.
 
 Expected APIs:
 
@@ -109,9 +111,16 @@ Expected APIs:
 
 Expected output:
 
-- Customer users can view active products.
-- Product response includes resolved price for the current customer.
-- Backend resolves prices; frontend does not calculate customer-specific prices.
+- [x] Customer users can view active products.
+- [x] Product response includes resolved price for the current customer.
+- [x] Backend resolves prices; frontend does not calculate customer-specific prices.
+- [x] Admin users cannot access the customer product API.
+- [x] Inactive products are hidden from list and detail responses.
+
+Notes:
+
+- Product API tests cover customer price resolution, inactive products, admin rejection, and unauthenticated rejection.
+- Demo customer, user, product, and unit names are seeded in Japanese for the target market.
 
 ## Step 4: Order API
 
@@ -202,6 +211,7 @@ Tasks:
 - [x] Implement admin order list page scaffold.
 - [x] Implement admin order detail page scaffold.
 - [x] Convert visible UI copy to Japanese.
+- [x] Wire customer product page to backend Product API.
 - [ ] Wire pages to backend APIs.
 - [ ] Implement real cart state and order submission.
 - [ ] Add complete loading states.
@@ -245,9 +255,9 @@ Expected output:
 
 ## Acceptance Checklist
 
-- [ ] Customer A can log in.
-- [ ] Customer A can see product list.
-- [ ] Customer A can see customer-specific prices.
+- [x] Customer A can log in.
+- [x] Customer A can see product list.
+- [x] Customer A can see customer-specific prices.
 - [ ] Customer A can create an order.
 - [ ] Customer A can view own order history.
 - [ ] Customer A cannot view Customer B's order.
