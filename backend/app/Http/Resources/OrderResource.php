@@ -22,6 +22,13 @@ class OrderResource extends JsonResource
             'note' => $this->note,
             'total_amount' => $this->total_amount,
             'ordered_at' => $this->ordered_at?->format('Y-m-d H:i'),
+            'customer' => $this->whenLoaded('customer', function () {
+                return [
+                    'id' => $this->customer->id,
+                    'code' => $this->customer->code,
+                    'name' => $this->customer->name,
+                ];
+            }),
             'items_count' => $this->whenCounted('items'),
             'items' => OrderItemResource::collection($this->whenLoaded('items')),
         ];

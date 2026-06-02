@@ -15,6 +15,11 @@ export interface Order {
   id: number
   order_no: string
   status: OrderStatus
+  customer?: {
+    id: number
+    code: string
+    name: string
+  }
   desired_delivery_date: string | null
   note: string | null
   total_amount: number

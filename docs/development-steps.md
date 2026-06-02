@@ -21,7 +21,8 @@ Last updated: 2026-06-02
 - Customer product APIs have been implemented and verified with the seeded Customer A account.
 - The customer product page reads products and customer-specific prices from the backend.
 - Customer order APIs have been implemented and verified from the browser flow.
-- Admin and CSV APIs are still pending.
+- Admin order APIs, status updates, and CSV export have been implemented and verified from the browser flow.
+- README finalization and cleanup are still pending.
 
 ## Final Goal
 
@@ -159,15 +160,15 @@ Notes:
 
 ## Step 5: Admin API
 
-Status: Not started
+Status: Complete
 
 Tasks:
 
-- [ ] Implement admin order list.
-- [ ] Implement admin order detail.
-- [ ] Implement order status update.
-- [ ] Validate allowed status transitions.
-- [ ] Implement CSV export.
+- [x] Implement admin order list.
+- [x] Implement admin order detail.
+- [x] Implement order status update.
+- [x] Validate allowed status transitions.
+- [x] Implement CSV export.
 
 Expected APIs:
 
@@ -178,10 +179,15 @@ Expected APIs:
 
 Expected output:
 
-- Admin users can view all customer orders.
-- Admin users can update order status only through allowed transitions.
-- Admin users can export order data as CSV.
-- CSV contains one row per order item.
+- [x] Admin users can view all customer orders.
+- [x] Admin users can update order status only through allowed transitions.
+- [x] Admin users can export order data as CSV.
+- [x] CSV contains one row per order item.
+
+Notes:
+
+- Admin API tests cover list, detail, status updates, invalid transitions, CSV export, and customer rejection.
+- Allowed transitions are pending to confirmed/cancelled, confirmed to preparing/cancelled, and preparing to delivered.
 
 ## Step 6: Frontend Setup
 
@@ -220,9 +226,9 @@ Tasks:
 - [x] Wire customer product page to backend Product API.
 - [x] Wire customer order pages to backend Order API.
 - [x] Implement real cart state and order submission.
-- [ ] Wire admin pages to backend APIs.
-- [ ] Add complete loading states.
-- [ ] Add complete error handling.
+- [x] Wire admin pages to backend APIs.
+- [x] Add complete loading states.
+- [x] Add complete error handling.
 
 Expected routes:
 
@@ -235,9 +241,9 @@ Expected routes:
 
 Expected output:
 
-- [ ] Customer users can complete the product browsing and order creation flow.
-- [ ] Customer users can view their own order history and details.
-- [ ] Admin users can view, filter, update, and export orders.
+- [x] Customer users can complete the product browsing and order creation flow.
+- [x] Customer users can view their own order history and details.
+- [x] Admin users can view, filter, update, and export orders.
 
 ## Step 8: README And Cleanup
 
@@ -268,10 +274,10 @@ Expected output:
 - [x] Customer A can create an order.
 - [x] Customer A can view own order history.
 - [x] Customer A cannot view Customer B's order.
-- [ ] Admin can log in.
-- [ ] Admin can see all orders.
-- [ ] Admin can update order status.
-- [ ] Admin can export orders as CSV.
+- [x] Admin can log in.
+- [x] Admin can see all orders.
+- [x] Admin can update order status.
+- [x] Admin can export orders as CSV.
 - [x] Order creation uses DB transaction.
 - [x] Order items store price snapshots.
 - [ ] README explains the business purpose and implementation points.

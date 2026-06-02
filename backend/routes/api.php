@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\AdminOrderController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\Api\ProductController;
@@ -28,8 +29,9 @@ Route::middleware(['auth:sanctum', 'role:customer'])->group(function () {
     Route::get('/orders/{order}', [OrderController::class, 'show']);
 });
 
-// Admin routes:
-// GET /api/admin/orders
-// GET /api/admin/orders/{id}
-// PATCH /api/admin/orders/{id}/status
-// GET /api/admin/orders/export
+Route::middleware(['auth:sanctum', 'role:admin'])->prefix('admin')->group(function () {
+    Route::get('/orders/export', [AdminOrderController::class, 'export']);
+    Route::get('/orders', [AdminOrderController::class, 'index']);
+    Route::get('/orders/{order}', [AdminOrderController::class, 'show']);
+    Route::patch('/orders/{order}/status', [AdminOrderController::class, 'updateStatus']);
+});
