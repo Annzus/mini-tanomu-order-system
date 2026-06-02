@@ -22,7 +22,7 @@ Last updated: 2026-06-02
 - The customer product page reads products and customer-specific prices from the backend.
 - Customer order APIs have been implemented and verified from the browser flow.
 - Admin order APIs, status updates, and CSV export have been implemented and verified from the browser flow.
-- README finalization and cleanup are still pending.
+- README finalization and cleanup have been completed.
 
 ## Final Goal
 
@@ -212,7 +212,7 @@ Expected output:
 
 ## Step 7: Frontend Pages
 
-Status: In progress
+Status: Complete
 
 Tasks:
 
@@ -247,7 +247,7 @@ Expected output:
 
 ## Step 8: README And Cleanup
 
-Status: In progress
+Status: Complete
 
 Tasks:
 
@@ -255,16 +255,20 @@ Tasks:
 - [x] Ensure `.env` is ignored.
 - [x] Ensure backend and frontend `.env.example` files exist.
 - [x] Maintain root `.gitignore` for monorepo structure.
-- [ ] Add demo account information.
-- [ ] Add database design summary.
-- [ ] Add key implementation points.
-- [ ] Add screenshots if available.
-- [ ] Remove unused template code.
+- [x] Add demo account information.
+- [x] Add database design summary.
+- [x] Add key implementation points.
+- [x] Add bilingual README links and a Japanese companion README.
+- [x] Remove unused template code.
 
 Expected output:
 
-- [ ] README explains the project clearly for a Laravel 11 / Vue 3 B2B SaaS demo.
-- [ ] Repository is clean and ready to share.
+- [x] README explains the project clearly for a Laravel 11 / Vue 3 B2B SaaS demo.
+- [x] Repository is clean and ready to share.
+
+Notes:
+
+- Screenshots are optional and were not added because the browser screenshot capture timed out during cleanup.
 
 ## Acceptance Checklist
 
@@ -280,7 +284,7 @@ Expected output:
 - [x] Admin can export orders as CSV.
 - [x] Order creation uses DB transaction.
 - [x] Order items store price snapshots.
-- [ ] README explains the business purpose and implementation points.
+- [x] README explains the business purpose and implementation points.
 
 ## Deferred Items
 
