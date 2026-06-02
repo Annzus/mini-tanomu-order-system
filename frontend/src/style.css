@@ -59,6 +59,11 @@ h2 {
   line-height: 1.25;
 }
 
+dl,
+dd {
+  margin: 0;
+}
+
 table {
   width: 100%;
   border-collapse: collapse;
@@ -287,6 +292,60 @@ label {
 
 .quantity-input {
   max-width: 86px;
+}
+
+.form-stack {
+  display: grid;
+  gap: 12px;
+}
+
+.cart-list,
+.detail-list {
+  display: grid;
+  gap: 10px;
+}
+
+.cart-row,
+.summary-row,
+.detail-list div {
+  align-items: center;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  gap: 12px;
+  justify-content: space-between;
+  padding-bottom: 10px;
+}
+
+.summary-row {
+  border-bottom: 0;
+  font-size: 18px;
+  padding-top: 2px;
+}
+
+.detail-list dt {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.detail-list dd {
+  font-weight: 700;
+  text-align: right;
+}
+
+.detail-action {
+  justify-self: start;
+  text-decoration: none;
+}
+
+.table-link {
+  color: var(--accent);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.table-link:hover {
+  text-decoration: underline;
 }
 
 .eyebrow,

@@ -20,7 +20,8 @@ Last updated: 2026-06-02
 - Backend auth behavior is covered by Feature tests.
 - Customer product APIs have been implemented and verified with the seeded Customer A account.
 - The customer product page reads products and customer-specific prices from the backend.
-- Order, admin, and CSV APIs are still pending.
+- Customer order APIs have been implemented and verified from the browser flow.
+- Admin and CSV APIs are still pending.
 
 ## Final Goal
 
@@ -124,19 +125,19 @@ Notes:
 
 ## Step 4: Order API
 
-Status: Not started
+Status: Complete
 
 Tasks:
 
-- [ ] Implement `StoreOrderRequest`.
-- [ ] Implement `OrderService`.
-- [ ] Implement order creation inside a DB transaction.
-- [ ] Generate backend order numbers.
-- [ ] Store order item product snapshots.
-- [ ] Calculate `subtotal` and `total_amount` on the backend.
-- [ ] Implement customer order history.
-- [ ] Implement customer order detail.
-- [ ] Ensure customers can only view their own orders.
+- [x] Implement `StoreOrderRequest`.
+- [x] Implement `OrderService`.
+- [x] Implement order creation inside a DB transaction.
+- [x] Generate backend order numbers.
+- [x] Store order item product snapshots.
+- [x] Calculate `subtotal` and `total_amount` on the backend.
+- [x] Implement customer order history.
+- [x] Implement customer order detail.
+- [x] Ensure customers can only view their own orders.
 
 Expected APIs:
 
@@ -146,10 +147,15 @@ Expected APIs:
 
 Expected output:
 
-- Customer users can create orders.
-- Inactive products cannot be ordered.
-- Frontend-submitted prices are not accepted or trusted.
-- Historical order item prices remain unchanged even if product prices change later.
+- [x] Customer users can create orders.
+- [x] Inactive products cannot be ordered.
+- [x] Frontend-submitted prices are not accepted or trusted.
+- [x] Historical order item prices remain unchanged even if product prices change later.
+
+Notes:
+
+- Order API tests cover backend price calculation, price snapshots, customer isolation, inactive product rejection, admin rejection, and unauthenticated rejection.
+- Customer product, order history, and order detail pages are wired to the order APIs.
 
 ## Step 5: Admin API
 
@@ -212,8 +218,9 @@ Tasks:
 - [x] Implement admin order detail page scaffold.
 - [x] Convert visible UI copy to Japanese.
 - [x] Wire customer product page to backend Product API.
-- [ ] Wire pages to backend APIs.
-- [ ] Implement real cart state and order submission.
+- [x] Wire customer order pages to backend Order API.
+- [x] Implement real cart state and order submission.
+- [ ] Wire admin pages to backend APIs.
 - [ ] Add complete loading states.
 - [ ] Add complete error handling.
 
@@ -258,15 +265,15 @@ Expected output:
 - [x] Customer A can log in.
 - [x] Customer A can see product list.
 - [x] Customer A can see customer-specific prices.
-- [ ] Customer A can create an order.
-- [ ] Customer A can view own order history.
-- [ ] Customer A cannot view Customer B's order.
+- [x] Customer A can create an order.
+- [x] Customer A can view own order history.
+- [x] Customer A cannot view Customer B's order.
 - [ ] Admin can log in.
 - [ ] Admin can see all orders.
 - [ ] Admin can update order status.
 - [ ] Admin can export orders as CSV.
-- [ ] Order creation uses DB transaction.
-- [ ] Order items store price snapshots.
+- [x] Order creation uses DB transaction.
+- [x] Order items store price snapshots.
 - [ ] README explains the business purpose and implementation points.
 
 ## Deferred Items

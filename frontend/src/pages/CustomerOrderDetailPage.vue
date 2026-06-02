@@ -1,6 +1,34 @@
 <script setup lang="ts">
+import { computed, onMounted, ref } from 'vue'
+import { RouterLink, useRoute } from 'vue-router'
+import { fetchOrder } from '../api/orders'
 import AppShell from '../components/AppShell.vue'
 import StatusBadge from '../components/StatusBadge.vue'
+import type { Order } from '../types/order'
+
+const route = useRoute()
+const order = ref<Order | null>(null)
+const isLoading = ref(false)
+const errorMessage = ref('')
+
+const orderId = computed(() => Number(route.params.id))
+
+onMounted(() => {
+  loadOrder()
+})
+
+async function loadOrder() {
+  isLoading.value = true
+  errorMessage.value = ''
+
+  try {
+    order.value = await fetchOrder(orderId.value)
+  } catch {
+    errorMessage.value = '注文詳細を取得できませんでした。'
+  } finally {
+    isLoading.value = false
+  }
+}
 </script>
 
 <template>
@@ -10,13 +38,34 @@ import StatusBadge from '../components/StatusBadge.vue'
         <span class="eyebrow">得意先</span>
         <h1>注文詳細</h1>
       </div>
-      <StatusBadge status="pending" />
+      <StatusBadge v-if="order" :status="order.status" />
     </div>
 
-    <div class="detail-layout">
+    <p v-if="isLoading" class="muted">注文詳細を読み込み中です。</p>
+    <p v-else-if="errorMessage" class="error-message">{{ errorMessage }}</p>
+
+    <div v-else-if="order" class="detail-layout">
       <section class="detail-panel">
-        <h2>ORD-20260601-000001</h2>
-        <p class="muted">注文詳細データは得意先向け注文APIから取得します。</p>
+        <h2>{{ order.order_no }}</h2>
+        <dl class="detail-list">
+          <div>
+            <dt>注文日時</dt>
+            <dd>{{ order.ordered_at }}</dd>
+          </div>
+          <div>
+            <dt>希望納品日</dt>
+            <dd>{{ order.desired_delivery_date ?? '-' }}</dd>
+          </div>
+          <div>
+            <dt>合計金額</dt>
+            <dd>¥{{ order.total_amount.toLocaleString() }}</dd>
+          </div>
+          <div>
+            <dt>備考</dt>
+            <dd>{{ order.note || '-' }}</dd>
+          </div>
+        </dl>
+        <RouterLink class="ghost-button detail-action" to="/customer/orders">注文履歴へ戻る</RouterLink>
       </section>
       <section class="table-panel">
         <table>
@@ -30,12 +79,12 @@ import StatusBadge from '../components/StatusBadge.vue'
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>トマト</td>
-              <td>kg</td>
-              <td>¥450</td>
-              <td>3</td>
-              <td>¥1,350</td>
+            <tr v-for="item in order.items ?? []" :key="item.id">
+              <td>{{ item.product_name }}</td>
+              <td>{{ item.unit }}</td>
+              <td>¥{{ item.unit_price.toLocaleString() }}</td>
+              <td>{{ item.quantity }}</td>
+              <td>¥{{ item.subtotal.toLocaleString() }}</td>
             </tr>
           </tbody>
         </table>

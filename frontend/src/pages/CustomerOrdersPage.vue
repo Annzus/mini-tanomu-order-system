@@ -1,18 +1,31 @@
 <script setup lang="ts">
+import { onMounted, ref } from 'vue'
 import { RouterLink } from 'vue-router'
+import { fetchOrders } from '../api/orders'
 import AppShell from '../components/AppShell.vue'
 import StatusBadge from '../components/StatusBadge.vue'
+import type { Order } from '../types/order'
 
-const orders = [
-  {
-    id: 1,
-    orderNo: 'ORD-20260601-000001',
-    status: 'pending',
-    desiredDeliveryDate: '2026-06-05',
-    totalAmount: 5550,
-    orderedAt: '2026-06-01 10:00',
-  },
-]
+const orders = ref<Order[]>([])
+const isLoading = ref(false)
+const errorMessage = ref('')
+
+onMounted(() => {
+  loadOrders()
+})
+
+async function loadOrders() {
+  isLoading.value = true
+  errorMessage.value = ''
+
+  try {
+    orders.value = await fetchOrders()
+  } catch {
+    errorMessage.value = '注文履歴を取得できませんでした。'
+  } finally {
+    isLoading.value = false
+  }
+}
 </script>
 
 <template>
@@ -23,6 +36,8 @@ const orders = [
         <h1>注文履歴</h1>
       </div>
     </div>
+
+    <p v-if="errorMessage" class="error-message">{{ errorMessage }}</p>
 
     <div class="table-panel">
       <table>
@@ -37,13 +52,19 @@ const orders = [
           </tr>
         </thead>
         <tbody>
+          <tr v-if="isLoading">
+            <td class="muted" colspan="6">注文履歴を読み込み中です。</td>
+          </tr>
+          <tr v-else-if="orders.length === 0">
+            <td class="muted" colspan="6">注文履歴はまだありません。</td>
+          </tr>
           <tr v-for="order in orders" :key="order.id">
-            <td>{{ order.orderNo }}</td>
+            <td>{{ order.order_no }}</td>
             <td><StatusBadge :status="order.status" /></td>
-            <td>{{ order.desiredDeliveryDate }}</td>
-            <td>¥{{ order.totalAmount.toLocaleString() }}</td>
-            <td>{{ order.orderedAt }}</td>
-            <td><RouterLink :to="`/customer/orders/${order.id}`">詳細</RouterLink></td>
+            <td>{{ order.desired_delivery_date ?? '-' }}</td>
+            <td>¥{{ order.total_amount.toLocaleString() }}</td>
+            <td>{{ order.ordered_at }}</td>
+            <td><RouterLink class="table-link" :to="`/customer/orders/${order.id}`">詳細</RouterLink></td>
           </tr>
         </tbody>
       </table>
